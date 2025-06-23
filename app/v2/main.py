@@ -2,7 +2,6 @@ from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 from pprint import pprint
 
-from context import Context
 from vector import retriever
 
 stream_mode = True
@@ -10,7 +9,7 @@ model = OllamaLLM(model="qwen2.5:7b")
 
 template = """
 You are a helpful assistant. Answer the question based on the context provided.
-If the context does not contain enough information to answer the question, respond with "I don't know".
+If the context does not contain enough information to answer the question, respond with "Let's stick the discussion to choreo for now?".
 
 Here is the context:
 {context}

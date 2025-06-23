@@ -1,0 +1,604 @@
+Okay, here's a summary of the provided content, maintaining the original headings and minimizing data loss:
+
+# Alert Overview
+
+This section describes how to configure alerts for Choreo components to proactively monitor the ecosystem and take corrective actions. Alert setup is available only at the component level.
+
+## Alert Types
+
+Choreo supports the following alert types:
+
+-   Latency alerts
+-   Traffic alerts
+-   Resource alerts
+-   Log alerts
+-   Build failure alerts
+-   Status code alerts
+
+### Latency Alerts
+
+Notifies when a component's response latency exceeds a threshold. Configurable parameters include Metric (99th, 95th, 90th, or 50th percentile), Threshold (milliseconds), and Period (duration).
+
+### Traffic Alerts
+
+Notifies when a component's request count exceeds a threshold. Configurable parameters include Threshold (requests per minute) and Period (monitoring window).
+
+### Resource Alerts
+
+Notifies when a component's CPU or memory usage exceeds thresholds. Configurable parameters include Metric (CPU or Memory), Threshold (mCPU or MiB), and Period.  CPU is measured in mCPU (milliCPU) and Memory in MiB (Mebibyte).
+
+### Log Alerts
+
+Triggers when a specific phrase appears a certain number of times in component logs within a time window. Configurable parameters include Search Phrase, Count, and Interval.
+
+### Build Failure Alerts
+
+Informs you if a build failure occurs for your component.
+
+### Status Code Alerts
+
+Triggers when a component returns specific HTTP errors. Configurable parameters include Status Code, Count, and Interval. Supported only for API proxy component types.
+
+## Configure Alert
+
+Steps to configure an alert: navigate to the component, click **Observability** and then click **Alerts**, click **Create Alert Rule**, select the alert type, environment, and deployment track/version, configure the fields, specify email recipients, configure advanced parameters (if required), review the explanation, and click **Create**. You can edit, remove, and disable/enable alerts.
+
+## Alert History & Notifications
+
+### View Alert History
+
+Check past triggered alerts in the **Alerts History** pane, filterable by Alert Type, Environment, Deployment Track/Version, and Time Range. API Proxy components show a Version filter and other components display a Deployment Track filter.
+
+### Email Notifications
+
+Alert recipients receive an email with alert details and a link to the Choreo console.
+
+# Generate Custom Reports
+
+Choreo Insights allows generating custom reports with metrics and group-by fields for analysis, supporting overtime charts, pie charts, and tables.
+
+## Metrics
+
+Available metrics include: Successful Hit Count, Response Cache Hits, Request Mediation Latency, Response Mediation Latency, Backend Latency, Total Latency, API Errors, and Target Errors.
+
+## Group-by
+
+Available group-by fields include: API Name, API Version, API Resource Template, API Method, API Creator, Application, Application Owner, Destination, User Agent, and Platform.
+
+Steps to generate a report: click **Custom Reports**, select metrics, select 1-3 group-by fields and their order, set values for each group-by field, and click **Generate**.
+
+## Download Reports
+
+Report data can be downloaded as PDF or CSV files.
+
+# Insights Overview
+
+Choreo provides insights into APIs, including traffic, error rates, and latency, to monitor and optimize API performance.
+
+Key capabilities include: analyzing API traffic, tracking errors, monitoring latency, generating reports, configuring alerts, obtaining granular insights, and drilling down into data.
+
+## View insights
+
+Access usage insights via the Choreo Console under **Insights** > **Usage**.  Permission-based access and data exclusion apply at the organization level.
+
+## Analyze statistics
+
+The **Usage Insights** page offers several subpages:
+
+### Overview
+
+Provides a system status overview, including Total Traffic, Error Request Count, Average Error Rate, 95th Percentile Latency, and an API Request Summary timeline.
+
+### Traffic
+
+Displays information related to API traffic, including API usage, application usage, and resource usage.  Allows filtering by API and Application.
+
+### Errors
+
+Presents information on erroneous API calls, categorized by error type and status code. Allows filtering by API, Category, and Status Code.
+
+### Latency
+
+Shows latency information, including the top 10 slowest APIs and latencies by category (Backend, Request mediation, Response mediation).
+
+### Cache
+
+Displays statistics on response caching efficiency, including Cache Hit Percentage and Latency.
+
+### Devices
+
+Provides information on operating systems and user agents used to invoke APIs.
+
+### Alerts
+
+Shows business alerts issued by Choreo.
+
+### Reports
+
+Allows downloading monthly usage reports, with preconfigured and custom report options.
+
+#### Download custom reports
+
+Custom reports can be generated by selecting APIs, applications, and specifying a time interval.
+
+#### Download pregenerated reports
+
+Pregenerated monthly reports are available for the last three months.
+
+### Geo Map
+
+Presents a geographical representation of API usage by country.  Available for on-premises environments.
+
+# Integrate Choreo with Moesif
+
+This section guides you through integrating Choreo with Moesif, an API analytics and monetization service.
+
+Steps include: generating an API key in Moesif (with separate instructions for new and existing users), configuring Choreo with the Moesif API key, and invoking an API to observe data on the Moesif dashboard.
+
+# Observability Overview
+
+The Choreo observability dashboard provides a comprehensive interface to visualize and monitor the performance of services deployed on Choreo.
+
+![Dashboard overview](../assets/img/monitoring-and-insights/observability/overview-overall.png){.cInlineImage-full}
+
+The Observability dashboard allows you to:
+
+- Observe the throughput and latencies of requests served over a given period.
+- Compare metrics side-by-side to facilitate efficient diagnosis.
+- Observe the diagnostics view generated over a given period.
+- View logs generated over a specific timeframe.
+
+!!! tip
+    If you are a Choreo private data plane customer and you want to observe your private data plane using New Relic, see [Observing Choreo Private Data Planes With New Relic](https://wso2.com/blogs/thesource/observing-choreo-private-data-planes-with-new-relic/).
+
+## Throughput and latency graphs
+
+The throughput graph depicts the throughput of requests per second for a selected timestamp.   
+
+![Throughput and latency graph](../assets/img/monitoring-and-insights/observability/throughput-and-latency.png){.cInlineImage-full} 
+    
+By default, Choreo renders this graph for the data generated within the past 24 hours. You can change the default time window by selecting the time range and zone from the options bar. To expand the graph, click and drag the cursor over the period you want to drill down. 
+
+You can view the Choreo service logs in the **Logs** pane below the throughput and latency graph. Clicking on a graph updates the **Logs** view to contain the corresponding log entries generated at that time. You can use these logs to identify the reasons for any latency and throughput anomalies you detect using the graph.
+
+## Diagnostics view
+
+The **Diagnostics view** allows you to simultaneously analyze errors, throughput, latencies, CPU usage, memory usage, and logs for a particular event. This facilitates detailed error detection and analysis.
+
+By default, the time range selected for the **Throughput & Latency** graphs is the same time range used for the **Diagnostics view**.
+
+Each horizontal section of the graph, termed a *bin*, represents a specific period and comprises:
+
+- **Date/Time:** Indicates when the log entries began to appear.
+- **Logs:**  List of log entries and respective log counts within the bin's timeframe, sorted by precedence (error logs followed by info logs). Each bin displays a maximum of five log entries.
+- **Error:** The number of HTTP errors that occurred at the selected time.
+- **TP:** Throughput of the requests at the selected time (req/s).
+- **Latency:** Request latency at the selected time (ms).
+- **CPU:** CPU usage at the selected time (millicores).
+- **Memory:** Memory usage at the selected time (MiB).
+
+## Logs
+
+The **Logs** pane serves as a centralized view to observe logs of the components you deploy on Choreo. This facilitates rigorous troubleshooting and analysis.
+
+
+# View Logs
+
+The unified log view in Choreo allows you to view runtime and audit logs to gain application and user insights while ensuring data privacy.
+
+Choreo provides real-time insights through live logs and allows you to view historical logs for insights into the past. You also have the flexibility to define a required time range to view relevant log entries, where an intuitive scrolling capability facilitates easy viewing of appropriate logs within the selected time frame.
+
+The log view also provides advanced filtering capabilities that allow you to efficiently navigate through appropriate logs to expedite troubleshooting in distributed environments.
+
+!!! info "Note"
+        All personally identifiable information (PII) gets resolved at the frontend service level, with only relevant UUIDs stored in logs.
+
+## Runtime logs
+
+Choreo runtime logs provide insights into both project and component-level logs, covering application and gateway logs. These logs streamline the debugging process by centralizing diverse log sources.
+
+In Choreo, any organization member can view runtime logs via the runtime logs page. Choreo allows you to apply filters based on parameters such as log level (error, warn, info, debug), log type (application, gateway), and environment (development, staging, production) to simplify the debugging process. 
+
+To access runtime logs, follow the steps below:
+
+1. Sign in to [Choreo](https://console.choreo.dev/).
+2. In the left navigation menu, click **Observability** and then click **Runtime Logs**. This displays runtime logs for the past 30 days by default.
+
+    To view logs based on a specific time range and other requirements, you can apply the necessary filter criteria.
+
+    ![Runtime logs](../assets/img/monitoring-and-insights/view-logs/runtime-logs.png)
+
+### Understand runtime logs
+
+When you view component-level logs on the **Runtime Logs** page, you will see both application and gateway logs.
+
+#### Application logs
+
+Each application log entry displays the following details:
+
+  - `timestamp`: The time when the request is received by the component.
+  - `level`: Indicates the severity of the log message. Possible values are **Debug**, **Info**, **Warn**, and **Error**.
+  - `componentVersion`: The version of the invoked component.
+  - `componentVersionId`: The identifier of the invoked component’s version.
+  - `envName`: The environment of the inbound request. For example, Development, Production, etc.
+
+#### Gateway logs
+
+Each gateway log entry displays the following details:
+
+  - `timestamp`: The time when the request is received by the gateway component.
+  - `logLine`: Contains the following details about the request, including inbound and outbound information from the gateway perspective.
+    - `Method`: The HTTP method of the request.
+    - `RequestPath`: The path of the inbound request.
+    - `ServicePath`: The path of the outbound request.
+    - `UserAgent`: The user-agent header of the request.
+    - `CorrelationID`: The request identifier of the inbound request. This is useful to track a request.
+    - `ServiceHost`: The host IP of the backend.
+    - `Duration`: The time taken for the gateway to serve the request.  
+  - `gatewayCode`: Indicates the state of the request from the gateway perspective. Possible values are as follows:
+    - `BACKEND_RESPONSE`:  Indicates successful processing of the request by the gateway with a response to the client from the backend application.
+    - `CORS_RESPONSE`: Denotes a CORS (Cross Origin Resource Sharing) request.
+    - `AUTH_FAILURE`: Indicates a request failure at the gateway due to authentication or authorization issues, such as an invalid token.
+    - `NO_HEALTHY_BACKEND`: Indicates a request failure at the gateway due to a non-existent backend.
+    - `RATE_LIMITED`: Indicates a request failure at the gateway due to surpassing the rate limit enforced within the component.
+    - `RESOURCE_NOT_FOUND`: Indicates a request failure at the gateway due to the absence of a matching API resource for the inbound request. This can be caused by a mismatch in the HTTP method, path, or host.
+    - `BACKEND_TIMEOUT`: Indicates a request timeout when calling the backend application from the gateway.
+    - `GATEWAY_ERROR`: Indicates a request failure due to an erroneous behavior in the gateway.
+
+    !!! info "Note"
+         Occasionally, a request may not fit into any of the above categories. In such instances, the `gatewayCode` is displayed as `UNKNOWN`.
+
+  - `statusCode`: The HTTP status code returned to the client.
+  - `componentVersion`: The version of the invoked component.
+  - `envName`: The environment of the inbound request. For example, Development, Production, etc.
+
+## Audit logs
+
+Audit logs, also called audit trails, enhance security, ensure compliance, provide operational insights, and help manage risks. 
+
+In Choreo, an audit log records organization-level user-specific operations performed via the Choreo Console. It also captures the timestamp and the outcome of the action. 
+
+As of now, Choreo captures the following user-specific operations as audit logs:
+
+- Project creation, update, and deletion.
+- Component creation, update, and deletion.
+- Component promotion initiation.
+- Component version creation.
+- Component deployment, redeployment, and undeployment initiation for all components other than REST API Proxy components.
+- Component API access mode update.
+- Enabling and disabling component auto-deployment on commit. 
+- Component build configuration update.
+- Component endpoint creation, update, and deletion.
+- Organization user management.
+- On-premises key management.
+- Project-level configuration management.
+
+In Choreo, organization administrators are allowed to view audit logs by default. If other members need to access organization-specific audit logs, the administrator can create a role with the relevant permission and assign it to members. For step-by-step instructions on how to create and assign a role with relevant permission, see [Manage audit log access](#manage-audit-log-access).
+
+To view audit logs, follow these steps:
+
+1. Sign in to [Choreo](https://console.choreo.dev/).
+2. In the Choreo Console, go to the top navigation menu and click **Organization**.
+   
+    !!! tip
+         As of now, you can only view organization-level audit logs.
+
+3. In the left navigation menu, click **DevOps** and then click **Audit Logs**. This displays audit logs for the past 30 days by default.
+
+    To view audit logs based on a specific time range and other requirements, you can apply the necessary filter criteria.
+
+    ![Audit logs](../assets/img/monitoring-and-insights/view-logs/audit-logs.png)
+
+### Audit log retention
+
+Choreo retains audit logs for one year and archives them for an additional year. Therefore, the total retention period for audit logs is two years.
+
+### Manage audit log access
+
+Follow the steps given below to create a role with audit log access permission and assign it to organization members who need access to audit logs:
+
+!!! info "Note"
+        You must be the organization administrator to perform this action.
+
+#### Step 1: Create a role with audit log access permission
+
+1. In the Choreo Console, go to the top navigation menu and click **Organization**.
+2. In the left navigation menu, click **Settings**.
+3. On the **Organization** tab, click **Roles** and then click **+ Create Role**.
+4. Enter a name and description for the role.
+   
+     ![Create role](../assets/img/monitoring-and-insights/view-logs/create-role-to-view-audit-logs.png)
+
+5. Click **Next**.
+6. In the **Create Role** dialog, select **LOG-MANAGEMENT** under **Permissions**.
+
+     ![Select log management permission](../assets/img/monitoring-and-insights/view-logs/log-management-permission.png)
+
+7. Click **Create**.  
+
+
+#### Step 2: Assign the created role to an organization member
+
+1. On the **Organization** tab, click **Members**. This lists the members of the organization with their respective details.
+2. Click on a member who needs to have access to audit logs, and then click **+ Add Role**.
+   
+    !!! tip
+         If you want to invite one or more members and assign them the audit log viewer role, follow the steps given below:
+
+           1. Click **+ Invite Member** and then click to expand the **Roles** list.
+           2. Select the role you created in [Step 1](#step-1-create-a-role-with-audit-log-access-permission).
+           3. In the **Emails** field, enter the email addresses of members you want to invite and grant permission to access audit logs.
+           4. Click **Invite**. This sends an invitation email to each email address so that the members can accept and obtain access to view audit logs.
+
+3. Click to expand the **Roles** list and select the role you created in [Step 1](#step-1-create-a-role-with-audit-log-access-permission).
+4. Click **Add**. This assigns the selected role to the member. 
+
+
+# Configure CIO Dashboard
+
+![CIO dashboard](../../assets/img/monitoring-and-insights/engineering-insights/cio-dashboard.png){.cInlineImage-full}
+
+You can view DORA metrics in Choreo to use as KPIs to measure your organization's DevOps team's performance. Choreo enables this feature by default for all organizations. DORA includes the following four key metrics that are regarded as the most important metrics to indicate team performance:
+
+- Deployment Frequency: How often an organization successfully releases to production
+- Lead Time for Changes: The amount of time it takes a commit to get into production
+- Change Failure Rate: The percentage of deployments causing a failure in production
+- Time to Restore Service: How long it takes an organization to recover from a failure in production
+
+
+Choreo enables two DORA metrics by default; deployment frequency and lead time for change.
+
+## Configure the CIO Dashboard with all metrics
+
+To configure the CIO dashboard by enabling the other two metrics, follow the steps below:
+
+1. Sign in to Choreo using your Google, GitHub, or Microsoft account.
+2. On the left navigation menu, click **Insights** and then click **Delivery**.
+4. Scroll to the bottom of the dashboard and click **Configure**.
+5. Select your incident management system. Currently, Choreo only supports GitHub. 
+
+## Configuring GitHub as the incident management system
+
+![Configure](../../assets/img/monitoring-and-insights/engineering-insights/enable-dora-metrics.png){.cInlineImage-full}
+
+To configure GitHub as the incident management system, follow the steps below: 
+
+### Step 1: Authorize
+
+![Authorize](../../assets/img/monitoring-and-insights/engineering-insights/add-integration-cio-dashboard.png){.cInlineImage-threeQuarter}
+
+First, let's authorize Choreo to access the repositories used to record incidents. 
+
+On the **Add Integration** page,  select **GitHub** and click **Authorize with GitHub**.
+
+Once the authorization process is complete, you can start configuring the GitHub repository.
+
+### Step 2: Configure
+
+![Configure](../../assets/img/monitoring-and-insights/engineering-insights/add-integration-configure.png){.cInlineImage-threeQuarter}
+
+By default, Choreo collects incident details(issues) from all repositories containing Choreo components. However, you can configure a GitHub account and a GitHub repository to allow Choreo to read issues from a specific repository, and then click **Next**. 
+
+| **Field**       | **Description**                   |   **Value**   |
+|-----------------|-----------------------------|-----------------------------|
+| **Data Plane**  | Choreo collects incident details by running a scheduled job which invokes the GitHub API periodically. This job runs on the user's data plane.   This configuration allows users to specify a preferred data plane to run the job, especially when they have multiple data planes. | Select a preferred data plane from the **Data Plane** list.        |
+| **GitHub Account** | The GitHub account you have your repositories in.  | Select your GitHub account that includes the repository used for incident collection.|
+| **GitHub Repository**| By default, Choreo will collect incident details(issues) from all repositories that already have Choreo components. |
+    
+
+### Step 3: Filter label
+
+![Filter Label](../../assets/img/monitoring-and-insights/engineering-insights/filter-label.png){.cInlineImage-threeQuarter}
+
+The filter label allows Choreo to scrape issues associated with that label.
+
+- **Incident Label**:  The label Choreo uses to identify incidents. For example, `Type/Incident`. 
+
+- **Invalid incident label**(Optional): Choreo will not scrape issues with this label and will proceed to skip these issues. For example, `Resolution/Invalid`. You can use this label when you want to ignore issues. For example, closing an issue after identifying that it doesn't qualify as an incident issue as it was due to a user error. 
+
+Once you configure the labels, click **Save**.
+
+Choreo will enable incident data publishing in the background once you save. Once completed, DORA metric charts will appear in the CIO dashboard for **Mean Time To Recover** and **Change Failure Rate**. If there are any issues in the configuration, the configure banner will reappear, and the user can proceed to reconfigure.
+
+### Step 4: Enrich incident tickets with deployment information
+
+Choreo extracts deployment information from the relevant incident and generates DORA metrics that help you analyze the deployment statistics related to the incidents. Therefore, you must manually update the GitHub issue with the relevant deployment-related information. Follow the steps below to add the deployment information to the GitHub issue. 
+ 
+#### Get deployment details
+
+1. On the Choreo Console header, select the project and the component for which the incident was reported.
+2. On the left navigation menu, click **Deploy**.
+3. On the **Production Environment** card, click **Deployment History**.
+4. On the right-hand side panel, select the relevant deployment, and click **Release details** to copy the deployment details to the clipboard. 
+
+    ![Copy to clipboard](../../assets/img/monitoring-and-insights/engineering-insights/deployment-copy-to-clipboard.png){.cInlineImage-small}
+
+#### Add deployment information to the GitHub issue
+
+1. Edit the GitHub issue to add the deployment information. 
+2. Paste the deployment information you copied (in step 4 under the section `Get deployment details`) at the end of the issue body.
+3. Click **Save**.
+
+That's it! You have successfully configured your CIO dashboard to include the DORA metrics. 
+
+!!! note
+    The CIO Dashboard is expected to reflect the latest statistics within approximately 30 minutes.
+
+## Edit configurations
+
+   ![Edit configurations](../../assets/img/monitoring-and-insights/engineering-insights/edit-configurations.png){.cInlineImage-small}
+
+   You can edit or override the configurations you made via the edit option in the dashboard. 
+
+
+# View DORA metrics
+
+DORA metrics comprise four key metrics. Let's explore what each metric represents in Choreo. Choreo displays a summary and graphical representation of each metric.
+
+### Snapshot view
+
+![DORA metric summary](../../assets/img/monitoring-and-insights/engineering-insights/dora-metrics-summary.png){.cInlineImage-full}
+
+The snapshot view includes four tiles on the top of the dashboard, summarizing DORA metrics for the entire time period you select. The snapshot view categorizes each metric into four performance levels: elite, high, medium, and low. The categorization is based on the 2020 DORA metric report.
+
+![DORA matrix](../../assets/img/monitoring-and-insights/engineering-insights/dora-matrix.png){.cInlineImage-threeQuarter}
+
+### Time series view
+
+The time series view provides a graphical representation of how the statistics have changed over a period of time. You can use this view to analyze team performance and identify trends. 
+
+![Time Series View](../../assets/img/monitoring-and-insights/engineering-insights/time-series-view.jpg){.cInlineImage-full}
+
+
+## Deployment frequency
+
+DORA team definition: The frequency at which an organization successfully releases to production.
+
+In Choreo, this translates to the number of times an organization deploys a component to the production environment. Choreo does not count the deployment done to the development or other lower environments. 
+
+### Snapshot view
+
+![Deployment Frequency Snapshot](../../assets/img/monitoring-and-insights/engineering-insights/deployment-frequency-snapshot.png){.cInlineImage-small}
+
+The snapshot view of the `Deployment Frequency` metric shows the deployment frequency for all components within the selected organization. The frequency is dynamically determined and rounded to the nearest measurement. For example, if there is more than one deployment daily, the deployment frequency is measured in `deployments per day`. If the deployment frequency is less, it is measured in a higher granularity. For example, `deployments per week`.
+
+A lower deployment frequency indicates that your organizational efficiency is low and that you need to evaluate and improve the processes to encourage frequent releases.
+
+Choreo also displays the total number of deployments for the selected time range and the percentage increase or decrease compared to the previous time range.
+
+### Time series view
+
+![Deployment Frequency time series view](../../assets/img/monitoring-and-insights/engineering-insights/deployment-frequency-time-series.png){.cInlineImage-half}
+
+The time series view for the `Deployment Frequency` metric visualizes the deployment count as a bar chart for the selected time period. Deployment count is aggregated based on the ‘view by’ selector. Hovering over each bar shows the counts for the aggregated period. 
+Using this chart, organizations can identify deployment patterns, such as days of the week/months of the year where more deployments are likely to happen (near quarterly release days) and periods with fewer deployments. Decision-makers can then take steps to investigate and improve performance. 
+This chart displays the pattern before and after a process change so you can use it to evaluate the team's performance after a significant process change. 
+
+## Lead Time for Change
+
+ DORA team definition: The time it takes for a commit to reach production.
+
+ In Choreo, this translates into the time between committing and promoting a deployment to production. Although this approach may overlook any commits you push to production between two commits, it effectively assesses the efficiency of the review, approval, and CI/CD processes. Therefore, focusing on the production commits is adequate.  If a team commits locally for extended periods without deploying to production, this gets reflected in the `Deployment Frequency` charts.
+
+### Snapshot view
+
+![Lead Time For Change Frequency Snapshot](../../assets/img/monitoring-and-insights/engineering-insights/lead-time-for-a-change-summary.png){.cInlineImage-small}
+
+The snapshot view of this metric displays the 95th percentile of the lead time for the selected time period. 95th percentile serves as a better representation as it filters out large outliers that can taint the average value. Lower lead times for change suggest that your organization has efficient processes for change review, approval, and CI/CD, while longer times suggest that the process needs to improve. Organizations can also use the categorization label to determine their standpoint on global standards.
+
+Additionally, Choreo also displays the percentage increase or decrease compared to the last time period.
+
+### Time series view
+
+![Lead Time For Change Frequency Time Series View](../../assets/img/monitoring-and-insights/engineering-insights/lead-time-for-a-change-chart.png){.cInlineImage-half}
+
+The time series view of this metric visualizes the lead time as a bar chart for the selected time period. The time is summed based on the ‘view by’ selector. To handle outliers, the y-axis employs a log scale that represents values read dynamically. Hovering over each bar displays the actual counts for the aggregated period. 
+Using this chart, organizations can identify trends in their release process. For example, organizations can identify the time of the year when lead time rises, such as summer break. Also, organizations can use this to benchmark and evaluate new process changes. For example, if you introduced a process to include peer programming and reviewing, this chart can be used to evaluate its effect on the lead time and provide leadership with factual information to proceed further.
+
+## Change failure rate
+
+The DORA team definition: The percentage of deployments causing a failure in production. 
+
+In Choreo, this translates to the ratio of deployments causing production failures to the total number of deployments. If there is at least one incident reported against a deployment, Choreo considers that deployment as a failed deployment in production. Any deployment-time failures are not counted as production failures because such failures don't impact the end user. For this metric to be accurate, the organization is expected to open incidents adhering to the proper format as it is crucial for Choreo to identify production failures. 
+
+### Snapshot view
+
+![Change Failure Rate Snapshot](../../assets/img/monitoring-and-insights/engineering-insights/change-failure-rate-summary.png){.cInlineImage-small}
+
+The snapshot view of this metric visualizes the change failure rate as a percentage for the selected time period. This will be the absolute percentage for the entire time period. When deciding on the time, the time of deployment is considered instead of the incident reported time. For example, the change failure rate for January 2023 will reflect the following:
+ -  All deployments that happened within January.
+ -  Any incidents that were reported at any time (in or after January) against the January deployments.
+
+This view helps leadership assess the quality of deliverables and identify areas for improvement. Higher rates suggest that the organization needs to improve its processes to bring in more quality assurance aspects such as improved code coverage and end-to-end test coverage.
+
+Additionally, Choreo also shows the percentage increase or decrease compared to the previous time period.
+
+### Time series view
+
+![Change Failure Rate Time Series](../../assets/img/monitoring-and-insights/engineering-insights/change-failure-rate-chart.png){.cInlineImage-half}
+
+The time series view of this metric displays it as a line chart with data points corresponding to the granularity selected by the ‘view by’ selector. The absolute percentage is shown for each granularity.  Hovering over the line chart displays the actual counts for the aggregated period. 
+This chart helps leadership identify timely trends in product quality aspects. For example, this view displays the months of the year where the failure rate is high (for example, close to quarterly release/announcement dates). Also, you can use this to measure the effectiveness of changes introduced to improve quality. For example, if the organization introduced an end-to-end test pipeline integration to the PR approval process, they can use this view to factually observe the timely impact of that change and determine how it decreases the failure rate.
+
+## Mean Time to Recover(MTTR)
+
+The DORA team definition: The time it takes for an organization to recover from a production failure.
+
+In Choreo, this measures the time from identifying a production incident to resolving it. This metric reflects the responsiveness and agility of incident management teams.
+
+Choreo depends on the open and close times of incidents to gather the relevant information. Therefore, for the dashboards to be accurate, organizations must follow process guidelines to update and close incident tickets efficiently in their incident management system.
+
+### Snapshot view
+
+![Mean Time to Recovery Snapshot](../../assets/img/monitoring-and-insights/engineering-insights/mean-time-to-recovery-summary.png){.cInlineImage-small}
+
+The snapshot view for this metric displays the  mean recovery time for the selected time period. Choreo dynamically adjusts the time unit to measure this metric for better readability.
+This chart helps organizations evaluate the response time and agility of their incident handling teams, which in turn is an indication of stability. Higher MTTR means the leadership should look at new ways of improving the efficiency and agility of the teams handling incidents.
+
+### Time series view
+
+![Mean Time to Recovery Time Series](../../assets/img/monitoring-and-insights/engineering-insights/mean-time-to-recovery-chart.png){.cInlineImage-half}
+
+The time series view of this metric shows how the mean time to recovery changes over time on a granularity based on the ‘view by’ selector. Each time the `granularity mean` would be used as the aggregation factor. Hovering over the line chart displays the actual counts for the aggregated period. 
+This view helps leadership understand timely trends on mean time to recovery, such as higher values during holiday periods when there is less staff. Also, you can use this measurement to evaluate the effectiveness of process changes such as introducing an incident response plan. The trend view clearly shows the before and after statistics and the effectiveness of the process change.
+
+
+# View Private Data Plane (PDP) Logs 
+
+Choreo offers the capability to access runtime logs through its console. However, in cases where viewing logs for your PDP is not supported by Choreo yet, you can still view the runtime logs of your components via the log analyzing solution provided by your cloud vendor as a workaround.
+
+## Prerequisites
+
+Before you try out this guide, complete the following:
+
+1. Go to [https://console.choreo.dev/](https://console.choreo.dev/), and sign in using your preferred method.
+2. Select your component from **Components Listing**. This will open the **Overview** page of your component.
+3. In the left navigation menu, click **Runtime** under **DevOps**.
+4. Copy the `Release ID` and the `Namespace`. Save it for later.
+
+## View Private Data Plane (PDP) logs with Azure Log Analytics
+
+You can view your PDP logs with Azure Log Analytics by following the steps below: 
+
+1. Go to https://portal.azure.com/.
+2. Follow the [Azure Log Analytics Tutorial](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-tutorial#open-log-analytics) and open log analytics of your relative log analytics workspace.
+3. Copy and paste the query below into the query editor. 
+4. Replace the `<START_TIME_STAMP EX: 2023-04-10T07:07:31.684Z>` and `<END_TIME_STAMP EX: 2023-04-21T07:27:31.684Z>` values as required. Replace the '<RELEASE_ID>' and '<NAMESPACE>' with the values you copied by following the steps in the [prerequisites](#prerequisites) section. Replace the `<OPTIONAL SEARCH PHRASE>` with your search term, or leave it blank if you don't require any search filtering.
+5. Run the query to extract the relevant logs.
+
+```SQL
+let startDateTime = datetime('<START_TIME_STAMP EX: 2023-04-10T07:07:31.684Z>');
+let endDateTime = datetime('<END_TIME_STAMP EX: 2023-04-21T07:27:31.684Z>');
+let releaseId = '<RELEASE_ID>';
+let namespace = '<NAMESPACE>';
+let searchPhrase = '<OPTIONAL SEARCH PHRASE>';
+let startDateTimeKPI = iff(datetime_diff('second', endDateTime, startDateTime) > 60, startDateTime, endDateTime - 2m);let endDateTimeKPI = iff(datetime_diff('second', endDateTime, startDateTime) > 60, endDateTime, startDateTime + 2m);let filteredLogLevels = dynamic([]);
+let hasNoLevelFilter = array_length(filteredLogLevels) == 0;
+let commonKeys = dynamic(['time', 'level', 'module', 'traceId', 'spanId', 'message']);
+let ContainerIdList = KubePodInventory
+| where TimeGenerated > startDateTimeKPI and TimeGenerated < endDateTimeKPI
+| where Namespace == namespace
+| where extractjson('$.[0].release_id', PodLabel) == releaseId
+| distinct ContainerID;
+let data = ContainerLog
+| where TimeGenerated > startDateTime and TimeGenerated < endDateTime
+| where ContainerID in (ContainerIdList)
+| where searchPhrase == "" or LogEntry contains searchPhrase
+| top 126 by TimeGenerated desc
+| extend logs = parse_json(LogEntry)
+| project TimeGenerated, 
+LogLevel = iif(isempty(logs['level']), iff(LogEntrySource == 'stderr', 'ERROR', 'INFO'), logs['level']), 
+LogEntry = iif(isempty(logs['message']), logs, logs['message']),
+KeyValuePair = bag_remove_keys(logs, commonKeys)
+| where hasNoLevelFilter or LogLevel in (filteredLogLevels);
+let lastTimeStamp = data 
+| top 1 by TimeGenerated asc | project TimeGenerated;
+let trimmedData = data | where TimeGenerated > toscalar(lastTimeStamp)| sort by TimeGenerated desc;
+let selected = iff(toscalar(data | count) == 126, 'trimmedData', 'data');
+let choose = (selector:string){   union   (trimmedData | where selector == 'trimmedData'),    (data | where selector == 'data')};
+choose(selected);
+```
+
+## View Private Data Plane (PDP) logs with Amazon CloudWatch
+
+1. Go to https://portal.
